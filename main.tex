@@ -1,0 +1,82 @@
+\documentclass[addpoints]{exam}
+
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{tikz}
+
+% Header and footer.
+\pagestyle{headandfoot}
+\runningheadrule
+\runningfootrule
+\runningheader{CS 201 DS II}{Homework 5a}{Spring 2018}
+\runningfooter{}{Page \thepage\ of \numpages}{}
+\firstpageheader{}{}{}
+
+\qformat{{\large\bf Exercise \thequestiontitle}\hfill[\totalpoints\ points]}
+\boxedpoints
+\printanswers
+
+\title{Habib University\\CS 201 Data Structures II\\Spring 2018}
+\author{Don't Grade Me}  % replace with your ID, e.g. sh01703
+\date{Homework 5a\\\numpoints\ points. Due: 19h; Friday, 23 Mar.}
+
+\begin{document}
+\maketitle
+
+\begin{questions}
+
+  \titledquestion{6.4*}[10]
+  Implement a non-recursive method, {\tt size2(u)}, that computes
+  the size of the subtree rooted at node {\tt u}.
+  \begin{solution}
+    % Write your solution here
+  \end{solution}
+
+  \titledquestion{6.9}
+  The pre/in/post-order numbering of a tree labels the nodes of a tree with the integers $0,\ldots,n − 1$ in the order that they are encountered by a pre/in/post-order traversal. See \href{http://opendatastructures.org/ods-python/6_3_Discussion_Exercises.html#fig:binarytree-numbering}{Figure 6.10} in the book for an example.
+
+  Suppose we are given a binary tree with pre-, post-, and in-order numbers assigned to the nodes. Show how these numbers can be used to answer each of the following questions in constant time.
+  \begin{parts}
+    \part[10] Given a node $u$, determine the size of the subtree rooted at $u$.
+  \begin{solution}
+    % Write your solution here
+  \end{solution}
+    \part[10] Given a node $u$, determine the depth of $u$.
+  \begin{solution}
+    % Write your solution here
+  \end{solution}
+    \part[10] Given two nodes $u$ and $w$, determine if $u$ is an ancestor of $w$.
+  \begin{solution}
+    % Write your solution here
+  \end{solution}
+  \end{parts}
+
+  \titledquestion{6.15}[10]
+  Describe how to add the elements $\{1,\ldots,n\}$ to an initially empty BST in such a way that the resulting tree has height $n-1$. How many ways are there to do this?
+  \begin{solution}
+    % Write your solution here
+  \end{solution}
+
+  \titledquestion{7.3}[10]
+  Prove the assertion that there are 21,964,800 sequences that generate the tree on the right hand side of \href{http://opendatastructures.org/ods-python/7_1_Random_Binary_Search_Tr.html#fig:rbs-lvc}{Figure 7.1} in the book. (Hint: Give a recursive formula for the number of sequences that generate a complete binary tree of height $h$ and evaluate this formula for $h = 3$.)
+  \begin{solution}
+    % Write your solution here
+  \end{solution}
+
+  \titledquestion{7.7}
+  Suppose that a binary search tree stores, at each node, {\tt u}, the height, {\tt u.height}, of the subtree rooted at {\tt u}, and the size, {\tt u.size} of the subtree rooted at {\tt u}.
+  \begin{parts}
+  \part[10] Show how, if we perform a left or right rotation at {\tt u}, then these two quantities can be updated, in constant time, for all nodes affected by the rotation.
+  \begin{solution}
+    % Write your solution here
+  \end{solution}
+  \part[10] Explain why the same result is not possible if we try to also store the depth, {\tt u.depth}, of each node {\tt u}.
+  \begin{solution}
+    % Write your solution here
+  \end{solution}
+\end{parts}
+\end{questions}
+
+* - The question has been modified from the one in the book.
+
+\end{document}
