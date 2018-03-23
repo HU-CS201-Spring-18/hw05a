@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{tikz}
+\usepackage{tabto}
 
 % Header and footer.
 \pagestyle{headandfoot}
@@ -17,7 +18,7 @@
 \printanswers
 
 \title{Habib University\\CS 201 Data Structures II\\Spring 2018}
-\author{Don't Grade Me}  % replace with your ID, e.g. sh01703
+\author{aa02366-ga02197}  % replace with your ID, e.g. sh01703
 \date{Homework 5a\\\numpoints\ points. Due: 19h; Friday, 23 Mar.}
 
 \begin{document}
@@ -30,6 +31,21 @@
   the size of the subtree rooted at node {\tt u}.
   \begin{solution}
     % Write your solution here
+    \\
+    size2(u)\\
+    \tabto{5mm} \textbf{if} u is not null \textbf{then}\\
+    \tabto{10mm} \textbf{int} count $\leftarrow$ 0\\
+    \tabto{10mm} initialize a queue q\\
+    \tabto{10mm} q.push(u)\\
+    \tabto{10mm} \textbf{while} q is not empty \textbf{do}\\
+    \tabto{15mm} node* a $\leftarrow$ q.front()\\
+    \tabto{15mm} q.pop()\\    
+    \tabto{15mm} count $\leftarrow$ count + 1\\
+    \tabto{15mm} \textbf{if} a.left $\neq$ nil \textbf{then}\\ 
+    \tabto{20mm} q.push(a.left)\\
+    \tabto{15mm} \textbf{if} a.right $\neq$ nil \textbf{then}\\ 
+    \tabto{20mm} q.push(a.right)\\
+    \tabto{10mm} \textbf{return} count
   \end{solution}
 
   \titledquestion{6.9}
@@ -40,14 +56,20 @@
     \part[10] Given a node $u$, determine the size of the subtree rooted at $u$.
   \begin{solution}
     % Write your solution here
+    If $u$ is the root node of the tree, i.e the parent node of $u$ is nil, then we look at the label of $u$ in the post-ordering. The size of the tree would be $label + 1$.\\
+    If $u$ is a right child, i.e $u.parent.right$ = $u$, then the difference of the post-order label of the node $u$ and the post-order label of its sibling (the left node) will be the size of the subtree rooted at $u$.\\
+    If $u$ is a left child, i.e $u.parent.left$ = $u$, then the difference of the pre-order label of the sibling of $u$ (the right node of the parent) and the pre-order label of $u$ will be the size of the subtree rooted at $u$.
   \end{solution}
     \part[10] Given a node $u$, determine the depth of $u$.
   \begin{solution}
     % Write your solution here
+    If it's a leaf node, i.e $u.left$ and $u.right$ is nil, then the difference of the post-ordering label and pre-ordering label is the depth of the node.\\
+    (Incomplete for non-leaf nodes)
   \end{solution}
     \part[10] Given two nodes $u$ and $w$, determine if $u$ is an ancestor of $w$.
   \begin{solution}
     % Write your solution here
+    If the pre-order label of $w$ is greater than the pre-order label of $u$ and the post-order label of $w$ is less than the post-order label of $u$, then $w$ is present in the subtree of $u$ and hence $u$ is the ancestor of $w$.
   \end{solution}
   \end{parts}
 
@@ -55,12 +77,37 @@
   Describe how to add the elements $\{1,\ldots,n\}$ to an initially empty BST in such a way that the resulting tree has height $n-1$. How many ways are there to do this?
   \begin{solution}
     % Write your solution here
+    In order for $n$ elements to form a BST of height $n-1$ each node can have only 1 child node. Pick any element and make it the root. Pick another element, which can either be placed on the left or on the right of the root. Subsequently, the next element that is picked can either be placed on the left or on the right of the previous node. This is repeated for all the $n$ elements. Consequently, the resulting BST will have only one leaf.\\
+    With the exception of the root node which has no choice, every subsequent node has the choice of being placed either on the left or on the right of the previous node. Excluding the root, we are left with $n-1$ elements. Since we have 2 choices at every level, the number of ways then comes to $2^{n-1}$ ways.
   \end{solution}
 
   \titledquestion{7.3}[10]
   Prove the assertion that there are 21,964,800 sequences that generate the tree on the right hand side of \href{http://opendatastructures.org/ods-python/7_1_Random_Binary_Search_Tr.html#fig:rbs-lvc}{Figure 7.1} in the book. (Hint: Give a recursive formula for the number of sequences that generate a complete binary tree of height $h$ and evaluate this formula for $h = 3$.)
   \begin{solution}
     % Write your solution here
+    To calculate the total number of ways we can generate the tree in 7.1, we will break it down and consider the total number of ways we can generate each subtree as well.
+    
+    $n_{lst}$ = number of nodes in the left subtree\\
+    $n_{rst}$ = number of nodes in the right subtree
+    
+    The total number of ways would therefore be:\\
+    $N$ = (($n_{lst}$ $+$ $n_{rst}$)! $/$ ($n_{lst}$! $*$ $n_{rst}$!)) $*$ (Number of ways to generate the left subtree of height $h-1$) $*$ (Number of ways to generate the right subtree of height $h-1$)
+    
+    Using this for $h=3$:\\
+    Let the number of ways to generate the left subtree of height $h-1$ be $LST_{h-1}$ and the number of ways to generate the right subtree of height $h-1$ be $RST_{h-1}$.
+    
+    So therefore:\\
+    N(3) = (($n_{lst}$ $+$ $n_{rst}$)! $/$ ($n_{lst}$! $*$ $n_{rst}$!)) $*$ $LST_{2}$ $*$ $RST_{2}$
+    
+    We need to find $LST_{2}$ and $RST_{2}$\\
+    $LST_{2}$ = (($n_{lst}$ $+$ $n_{rst}$)! $/$ ($n_{lst}$! $*$ $n_{rst}$!)) $*$ $LST_{1}$ $*$ $RST_{1}$\\
+    $LST_{1}$ $=$ $RST_{1}$ = 2, because a tree of height 1 can be generated in 2 different ways.
+    
+    $LST_{2}$ = ($6!/(3! * 3!)$) $*$ 2 $*$ 2 = 80 ways\\
+    $RST_{2}$ = ($6!/(3! * 3!)$) $*$ 2 $*$ 2 = 80 ways
+    
+    Inserting these into the first equation:\\
+    N(3) = (($7$ $+$ $7$)! $/$ ($7$! $*$ $7$!)) $*$ 80 $*$ 80 = 21,964,800
   \end{solution}
 
   \titledquestion{7.7}
@@ -69,10 +116,21 @@
   \part[10] Show how, if we perform a left or right rotation at {\tt u}, then these two quantities can be updated, in constant time, for all nodes affected by the rotation.
   \begin{solution}
     % Write your solution here
+    We know that during rotation, one of the child of $u$ becomes the parent of $u$ and the parent of $u$ becomes the grandparent of node $u$. All other nodes apart from $u$ and its subtree remain affected.
+    
+    The height of the affected nodes will be: the height of its child + 1.\\
+    It would be 0 if there are no children.
+    
+    The size of the affected nodes will be: the number of its children + the size of its children.\\
+    It would be 0 if there are no children.
+    
+    These processes would take constant time.
   \end{solution}
   \part[10] Explain why the same result is not possible if we try to also store the depth, {\tt u.depth}, of each node {\tt u}.
   \begin{solution}
     % Write your solution here
+    If we store the depth, then we won't be able to update it in constant time because by depth, we mean the number of edges, or the distance from the root to $u$. After performing a rotation, the position of $u$ changes and therefore, its distance from the root node changes.\\
+    To update the depth of affected nodes, we would have to traverse through the graph and count the number of edges between the root and the affected nodes and this is not performed in constant time.
   \end{solution}
 \end{parts}
 \end{questions}
